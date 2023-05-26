@@ -1,0 +1,26 @@
+/**
+ * Defines the core interfaces for an aysnc store.
+ */
+
+// At a minimum, a store must be readable.
+interface IReadStore {
+  [Symbol.asyncIterator](): AsyncIterableIterator<any>;
+  entries(): Promise<IterableIterator<any>>;
+  forEach(callbackfn: (value: any, key: any) => Promise<void>): Promise<void>;
+  get(key: any): Promise<any>;
+  has(key: any): Promise<boolean>;
+  keys(): Promise<IterableIterator<any>>;
+  values(): Promise<IterableIterator<any>>;
+
+  // isKeyExplorable?(key: any): Promise<boolean>;
+  // traverse?(...keys: any[]): Promise<any>;
+}
+
+// A store that is both readable and writable.
+interface IWriteStore extends IReadStore {
+  clear(): Promise<void>;
+  delete(key: any): Promise<boolean>;
+  set(key: any, value: any): Promise<this>;
+
+  // onChange
+}
