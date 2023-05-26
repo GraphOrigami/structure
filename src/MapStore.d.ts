@@ -1,6 +1,6 @@
 /// <reference path="AsyncStore.ts"/>
 
-export default class MapStore implements IWriteStore {
+export default class MapStore implements IReadWriteStore {
   constructor(iterable?: Iterable<any> | null);
   [Symbol.asyncIterator](): AsyncIterableIterator<any>;
   clear(): Promise<void>;

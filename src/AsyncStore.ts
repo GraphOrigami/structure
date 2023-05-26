@@ -17,7 +17,7 @@ interface IReadStore {
 }
 
 // A store that is both readable and writable.
-interface IWriteStore extends IReadStore {
+interface IReadWriteStore extends IReadStore {
   clear(): Promise<void>;
   delete(key: any): Promise<boolean>;
   set(key: any, value: any): Promise<this>;

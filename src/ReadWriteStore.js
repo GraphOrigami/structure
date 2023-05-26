@@ -9,7 +9,7 @@ import ReadStore from "./ReadStore.js";
  * of other methods like `keys()` and `delete()`.
  */
 // @ts-ignore
-export default class WriteStore extends ReadStore {
+export default class ReadWriteStore extends ReadStore {
   async clear() {
     // @ts-ignore
     for (const key of await this.keys()) {
