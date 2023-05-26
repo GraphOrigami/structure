@@ -3,7 +3,7 @@
  */
 
 // At a minimum, a store must be readable.
-interface IReadStore {
+interface ReadStore {
   [Symbol.asyncIterator](): AsyncIterableIterator<any>;
   entries(): Promise<IterableIterator<any>>;
   forEach(callbackfn: (value: any, key: any) => Promise<void>): Promise<void>;
@@ -17,7 +17,7 @@ interface IReadStore {
 }
 
 // A store that is both readable and writable.
-interface IReadWriteStore extends IReadStore {
+interface ReadWriteStore extends ReadStore {
   clear(): Promise<void>;
   delete(key: any): Promise<boolean>;
   set(key: any, value: any): Promise<this>;

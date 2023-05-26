@@ -1,6 +1,6 @@
 /// <reference path="AsyncStore.ts"/>
 
-export default abstract class ReadStore implements IReadStore {
+export default abstract class ReadStoreBase implements ReadStore {
   [Symbol.asyncIterator](): AsyncIterableIterator<any>;
   entries(): Promise<IterableIterator<any>>;
   forEach(callbackfn: (value: any, key: any) => Promise<void>): Promise<void>;

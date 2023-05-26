@@ -1,9 +1,9 @@
-import ReadStore from "./ReadStore.js";
+import ReadStoreBase from "./ReadStoreBase.js";
 
 /**
- * @implements {IReadStore}
+ * @implements {ReadStore}
  */
-export default class FunctionStore extends ReadStore {
+export default class FunctionStore extends ReadStoreBase {
   /**
    * @param {Function} fn
    * @param {any[]} [domain]

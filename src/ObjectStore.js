@@ -1,9 +1,9 @@
-import ReadWriteStore from "./ReadWriteStore.js";
+import ReadWriteStoreBase from "./ReadWriteStoreBase.js";
 
 /**
- * @implements {IReadWriteStore}
+ * @implements {ReadWriteStore}
  */
-export default class ObjectStore extends ReadWriteStore {
+export default class ObjectStore extends ReadWriteStoreBase {
   /**
    * Create an explorable graph wrapping a given plain object or array.
    *

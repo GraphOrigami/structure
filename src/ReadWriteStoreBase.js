@@ -1,4 +1,4 @@
-import ReadStore from "./ReadStore.js";
+import ReadStoreBase from "./ReadStoreBase.js";
 
 /**
  * This serves as an abstract base class for a read/write store. JavaScript
@@ -9,7 +9,7 @@ import ReadStore from "./ReadStore.js";
  * of other methods like `keys()` and `delete()`.
  */
 // @ts-ignore
-export default class ReadWriteStore extends ReadStore {
+export default class ReadWriteStoreBase extends ReadStoreBase {
   async clear() {
     // @ts-ignore
     for (const key of await this.keys()) {

@@ -1,11 +1,11 @@
 import * as fs from "node:fs/promises";
 import path from "node:path";
-import ReadWriteStore from "./ReadWriteStore.js";
+import ReadWriteStoreBase from "./ReadWriteStoreBase.js";
 
 /**
- * @implements {IReadWriteStore}
+ * @implements {ReadWriteStore}
  */
-export default class FolderStore extends ReadWriteStore {
+export default class FolderStore extends ReadWriteStoreBase {
   /**
    * @param {string} dirname
    */

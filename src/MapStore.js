@@ -1,5 +1,5 @@
 /**
- * @implements {IReadWriteStore}
+ * @implements {ReadWriteStore}
  */
 export default class MapStore {
   map;
