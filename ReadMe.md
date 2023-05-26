@@ -8,5 +8,5 @@ The library includes:
 - Base classes `ReadStore` and `ReadWriteStore` that define derivable `Map` methods in terms of other methods. For example, `ReadStore` provides a base implementation of [entries](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/entries) in terms of `get` and `keys`, so that you create create new implementations of the read-only store interface with less work.
 - `ObjectStore`: read/write store wrapping a plain JavaScript object
 - `MapStore`: read/write store wrapping a (synchronous) JavaScript `Map`
-- `FilesStore`: read/write store wrapping a file system folder using the Node [fs](https://nodejs.org/api/fs.html) API
+- `FolderStore`: read/write store wrapping a file system folder using the Node [fs](https://nodejs.org/api/fs.html) API
 - `FunctionStore`: read-only store wrapping a JavaScript function

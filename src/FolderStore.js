@@ -5,7 +5,7 @@ import ReadWriteStore from "./ReadWriteStore.js";
 /**
  * @implements {IReadWriteStore}
  */
-export default class FilesStore extends ReadWriteStore {
+export default class FolderStore extends ReadWriteStore {
   /**
    * @param {string} dirname
    */

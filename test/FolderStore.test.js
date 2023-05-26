@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import test from "node:test";
-import store from "./fixtures/object.js";
+import store from "./fixtures/folder.js";
 
 test("can get the keys of the graph", async () => {
   assert.deepEqual(
