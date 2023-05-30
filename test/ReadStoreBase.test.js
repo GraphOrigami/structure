@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import test from "node:test";
-import ObjectStore from "../src/ObjectStore.js";
+import ObjectStore from "../src/AsyncKVObject.js";
 
 test("asyncIterator returns the entries", async () => {
   const entries = [];

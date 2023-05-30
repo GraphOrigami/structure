@@ -1,9 +1,9 @@
-import ReadStoreBase from "./ReadStoreBase.js";
+import AsyncKVDictBase from "./AsyncKVDictBase.js";
 
 /**
- * @implements {ReadStore}
+ * @implements {AsyncKVDict}
  */
-export default class FunctionStore extends ReadStoreBase {
+export default class FunctionStore extends AsyncKVDictBase {
   /**
    * @param {Function} fn
    * @param {any[]} [domain]

@@ -1,5 +1,5 @@
 /**
- * @implements {ReadWriteStore}
+ * @implements {AsyncKVStore}
  */
 export default class MapStore {
   map;

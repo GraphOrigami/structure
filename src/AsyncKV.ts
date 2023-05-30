@@ -3,7 +3,7 @@
  */
 
 // At a minimum, a store must be readable.
-interface ReadStore {
+interface AsyncKVDict {
   [Symbol.asyncIterator](): AsyncIterableIterator<any>;
   entries(): Promise<IterableIterator<any>>;
   forEach(callbackfn: (value: any, key: any) => Promise<void>): Promise<void>;
@@ -17,7 +17,7 @@ interface ReadStore {
 }
 
 // A store that is both readable and writable.
-interface ReadWriteStore extends ReadStore {
+interface AsyncKVStore extends AsyncKVDict {
   clear(): Promise<void>;
   delete(key: any): Promise<boolean>;
   set(key: any, value: any): Promise<this>;

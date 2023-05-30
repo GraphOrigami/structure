@@ -1,6 +1,6 @@
-/// <reference path="AsyncStore.ts"/>
+/// <reference path="AsyncKV.ts"/>
 
-export default abstract class ReadStoreBase implements ReadStore {
+export default abstract class AsyncKVDictBase implements AsyncKVDict {
   [Symbol.asyncIterator](): AsyncIterableIterator<any>;
   entries(): Promise<IterableIterator<any>>;
   forEach(callbackfn: (value: any, key: any) => Promise<void>): Promise<void>;

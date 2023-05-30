@@ -1,6 +1,6 @@
-/// <reference path="AsyncStore.ts"/>
+/// <reference path="AsyncKV.ts"/>
 
-export default class MapStore implements ReadWriteStore {
+export default class MapStore implements AsyncKVStore {
   constructor(iterable?: Iterable<any> | null);
   [Symbol.asyncIterator](): AsyncIterableIterator<any>;
   clear(): Promise<void>;

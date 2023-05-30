@@ -1,9 +1,9 @@
-import ReadWriteStoreBase from "./ReadWriteStoreBase.js";
+import AsyncKVStoreBase from "./AsyncKVStoreBase.js";
 
 /**
- * @implements {ReadWriteStore}
+ * @implements {AsyncKVStore}
  */
-export default class ObjectStore extends ReadWriteStoreBase {
+export default class ObjectStore extends AsyncKVStoreBase {
   /**
    * Create an explorable graph wrapping a given plain object or array.
    *

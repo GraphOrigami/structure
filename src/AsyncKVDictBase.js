@@ -6,7 +6,7 @@
  * This class implements methods like `entries()` that can be defined in terms
  * of other methods like `keys()` and `get()`.
  */
-export default class ReadStoreBase {
+export default class AsyncKVDictBase {
   async *[Symbol.asyncIterator]() {
     yield* await this.entries();
   }

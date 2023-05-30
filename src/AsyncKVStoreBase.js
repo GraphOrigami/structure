@@ -1,4 +1,4 @@
-import ReadStoreBase from "./ReadStoreBase.js";
+import AsyncKVDictBase from "./AsyncKVDictBase.js";
 
 /**
  * This serves as an abstract base class for a read/write store. JavaScript
@@ -9,7 +9,7 @@ import ReadStoreBase from "./ReadStoreBase.js";
  * of other methods like `keys()` and `delete()`.
  */
 // @ts-ignore
-export default class ReadWriteStoreBase extends ReadStoreBase {
+export default class AsyncKVStoreBase extends AsyncKVDictBase {
   async clear() {
     // @ts-ignore
     for (const key of await this.keys()) {

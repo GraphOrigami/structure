@@ -1,11 +1,11 @@
 import * as fs from "node:fs/promises";
 import path from "node:path";
-import ReadWriteStoreBase from "./ReadWriteStoreBase.js";
+import AsyncKVStoreBase from "./AsyncKVStoreBase.js";
 
 /**
- * @implements {ReadWriteStore}
+ * @implements {AsyncKVStore}
  */
-export default class FolderStore extends ReadWriteStoreBase {
+export default class FolderStore extends AsyncKVStoreBase {
   /**
    * @param {string} dirname
    */
