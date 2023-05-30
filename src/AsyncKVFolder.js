@@ -1,16 +1,14 @@
 import * as fs from "node:fs/promises";
 import path from "node:path";
-import AsyncKVStoreBase from "./AsyncKVStoreBase.js";
 
 /**
  * @implements {AsyncKVStore}
  */
-export default class FolderStore extends AsyncKVStoreBase {
+export default class AsyncKVFolder {
   /**
    * @param {string} dirname
    */
   constructor(dirname) {
-    super();
     this.dirname = path.resolve(process.cwd(), dirname);
   }
 
@@ -33,8 +31,7 @@ export default class FolderStore extends AsyncKVStoreBase {
   }
 
   async keys() {
-    const fileNames = await fs.readdir(this.dirname);
-    return fileNames[Symbol.iterator]();
+    return fs.readdir(this.dirname);
   }
 
   async set(key, value) {

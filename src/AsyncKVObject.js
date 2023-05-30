@@ -1,16 +1,13 @@
-import AsyncKVStoreBase from "./AsyncKVStoreBase.js";
-
 /**
  * @implements {AsyncKVStore}
  */
-export default class ObjectStore extends AsyncKVStoreBase {
+export default class AsyncKVObject {
   /**
    * Create an explorable graph wrapping a given plain object or array.
    *
    * @param {any} object The object/array to wrap.
    */
   constructor(object) {
-    super();
     this.object = object;
   }
 
@@ -65,7 +62,7 @@ export default class ObjectStore extends AsyncKVStoreBase {
       }
       obj = Object.getPrototypeOf(obj);
     }
-    return result[Symbol.iterator]();
+    return result;
   }
 
   /**
