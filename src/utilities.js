@@ -4,23 +4,23 @@
  */
 export default class utilities {
   /**
-   * @param {AsyncKVStore} asyncKV
+   * @param {AsyncStore} AsyncDict
    */
-  static async clear(asyncKV) {
+  static async clear(AsyncDict) {
     // @ts-ignore
-    for (const key of await asyncKV.keys()) {
-      await asyncKV.set(key, undefined);
+    for (const key of await AsyncDict.keys()) {
+      await AsyncDict.set(key, undefined);
     }
   }
 
   /**
-   * @param {AsyncKVStore} asyncKV
+   * @param {AsyncStore} AsyncDict
    * @param {any} key
    */
-  static async delete(asyncKV, key) {
-    const exists = await this.has(asyncKV, key);
+  static async delete(AsyncDict, key) {
+    const exists = await this.has(AsyncDict, key);
     if (exists) {
-      await asyncKV.set(key, undefined);
+      await AsyncDict.set(key, undefined);
       return true;
     } else {
       return false;
@@ -28,48 +28,50 @@ export default class utilities {
   }
 
   /**
-   * @param {AsyncKVDict} asyncKV
+   * @param {AsyncDict} AsyncDict
    */
-  static async entries(asyncKV) {
+  static async entries(AsyncDict) {
     const result = [];
     // @ts-ignore
-    for (const key of await asyncKV.keys()) {
-      const value = await asyncKV.get(key);
+    for (const key of await AsyncDict.keys()) {
+      const value = await AsyncDict.get(key);
       result.push([key, value]);
     }
     return result;
   }
 
   /**
-   * @param {AsyncKVDict} asyncKV
+   * @param {AsyncDict} AsyncDict
    * @param {Function} callbackFn
    */
-  static async forEach(asyncKV, callbackFn) {
+  static async forEach(AsyncDict, callbackFn) {
     const promises = [];
     // @ts-ignore
-    for (const key of await asyncKV.keys()) {
-      const promise = asyncKV.get(key).then((value) => callbackFn(value, key));
+    for (const key of await AsyncDict.keys()) {
+      const promise = AsyncDict.get(key).then((value) =>
+        callbackFn(value, key)
+      );
       promises.push(promise);
     }
     await Promise.all(promises);
   }
 
   /**
-   * @param {AsyncKVDict} asyncKV
+   * @param {AsyncDict} AsyncDict
    */
-  static async has(asyncKV, key) {
-    const value = await asyncKV.get(key);
+  static async has(AsyncDict, key) {
+    const value = await AsyncDict.get(key);
     return value !== undefined;
   }
 
   /**
-   * @param {AsyncKVDict} asyncKV
+   * @param {AsyncDict} AsyncDict
    */
-  static async values(asyncKV) {
+  static async values(AsyncDict) {
     const result = [];
     // @ts-ignore
-    for (const key of await asyncKV.keys()) {
-      const value = await asyncKV.get(key);
+    for (const key of await AsyncDict.keys()) {
+      const value = await AsyncDict.get(key);
       result.push(value);
     }
     return result;

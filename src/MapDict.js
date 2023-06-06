@@ -1,7 +1,7 @@
 /**
- * @implements {AsyncKVStore}
+ * @implements {AsyncStore}
  */
-export default class AsyncKVMap {
+export default class MapDict {
   map;
 
   /**

@@ -1,7 +1,7 @@
 /**
- * @implements {AsyncKVDict}
+ * @implements {AsyncDict}
  */
-export default class AsyncKVFunction {
+export default class FunctionDict {
   /**
    * @param {Function} fn
    * @param {any[]} [domain]

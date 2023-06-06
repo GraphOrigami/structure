@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import test from "node:test";
-import AsyncKVObject from "../src/AsyncKVObject.js";
+import ObjectDict from "../src/ObjectDict.js";
 import utilities from "../src/utilities.js";
 
 test("entries returns the [key, value] pairs", async () => {
@@ -61,7 +61,7 @@ test("delete removes a value", async () => {
 });
 
 function objectStore() {
-  return new AsyncKVObject({
+  return new ObjectDict({
     "Alice.md": "Hello, **Alice**.",
     "Bob.md": "Hello, **Bob**.",
     "Carol.md": "Hello, **Carol**.",

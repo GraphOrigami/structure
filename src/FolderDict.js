@@ -2,9 +2,9 @@ import * as fs from "node:fs/promises";
 import path from "node:path";
 
 /**
- * @implements {AsyncKVStore}
+ * @implements {AsyncStore}
  */
-export default class AsyncKVFolder {
+export default class FolderDict {
   /**
    * @param {string} dirname
    */

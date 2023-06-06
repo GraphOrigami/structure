@@ -1,7 +1,7 @@
 /**
- * @implements {AsyncKVStore}
+ * @implements {AsyncStore}
  */
-export default class AsyncKVObject {
+export default class ObjectDict {
   /**
    * Create an explorable graph wrapping a given plain object or array.
    *

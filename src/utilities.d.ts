@@ -1,10 +1,10 @@
-/// <reference path="AsyncKV.ts"/>
+/// <reference path="AsyncDict.ts"/>
 
 export default class utilities {
-  static clear(asyncKV: AsyncKVStore): Promise<void>;
-  static delete(asyncKV: AsyncKVStore, key: any): Promise<boolean>;
-  static entries(asyncKV: AsyncKVDict): Promise<IterableIterator<any>>;
-  static forEach(asyncKV: AsyncKVDict, callbackfn: (value: any, key: any) => Promise<void>): Promise<void>;
-  static has(asyncKV: AsyncKVDict, key: any): Promise<boolean>;
-  static values(asyncKV: AsyncKVDict): Promise<IterableIterator<any>>;
+  static clear(AsyncDict: AsyncStore): Promise<void>;
+  static delete(AsyncDict: AsyncStore, key: any): Promise<boolean>;
+  static entries(AsyncDict: AsyncDict): Promise<IterableIterator<any>>;
+  static forEach(AsyncDict: AsyncDict, callbackfn: (value: any, key: any) => Promise<void>): Promise<void>;
+  static has(AsyncDict: AsyncDict, key: any): Promise<boolean>;
+  static values(AsyncDict: AsyncDict): Promise<IterableIterator<any>>;
 }
