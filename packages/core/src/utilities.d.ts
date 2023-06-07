@@ -1,4 +1,4 @@
-/// <reference path="AsyncDictionary.ts"/>
+import type { AsyncDictionary, AsyncMutableDictionary } from "@graphorigami/types";
 
 export default class utilities {
   static clear(AsyncDictionary: AsyncMutableDictionary): Promise<void>;

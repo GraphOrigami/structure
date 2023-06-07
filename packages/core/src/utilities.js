@@ -1,4 +1,9 @@
 /**
+ * @typedef {import("@graphorigami/types").AsyncDictionary} AsyncDictionary
+ * @typedef {import("@graphorigami/types").AsyncMutableDictionary} AsyncMutableDictionary
+ */
+
+/**
  * This class implements utilities methods like `entries()` that can be defined
  * in terms of other methods like `keys()` and `get()`.
  */

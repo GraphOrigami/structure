@@ -1,4 +1,5 @@
 /**
+ * @typedef {import("@graphorigami/types").AsyncDictionary} AsyncDictionary
  * @implements {AsyncDictionary}
  */
 export default class FunctionGraph {

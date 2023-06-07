@@ -1,13 +1,11 @@
 {
-  "name": "async-store",
+  "name": "structure",
   "version": "0.0.1",
-  "type": "module",
-  "devDependencies": {
-    "@types/node": "20.2.4",
-    "typescript": "5.0.4"
-  },
+  "workspaces": [
+    "packages/core",
+    "packages/types"
+  ],
   "scripts": {
-    "test": "node --test",
-    "typecheck": "tsc"
+    "test": "node --test"
   }
 }

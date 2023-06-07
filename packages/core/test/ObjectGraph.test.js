@@ -1,19 +1,19 @@
 import assert from "node:assert";
 import test from "node:test";
-import store from "./fixtures/folder.js";
+import object from "./fixtures/object.js";
 
 test("can get the keys of the graph", async () => {
   assert.deepEqual(
-    [...(await store.keys())],
+    [...(await object.keys())],
     ["Alice.md", "Bob.md", "Carol.md"]
   );
 });
 
 test("can get the value for a key", async () => {
-  const alice = await store.get("Alice.md");
+  const alice = await object.get("Alice.md");
   assert.equal(alice, "Hello, **Alice**.");
 });
 
 test("getting an unsupported key returns undefined", async () => {
-  assert.equal(await store.get("xyz"), undefined);
+  assert.equal(await object.get("xyz"), undefined);
 });
