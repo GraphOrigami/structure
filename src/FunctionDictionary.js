@@ -1,7 +1,7 @@
 /**
- * @implements {AsyncDict}
+ * @implements {AsyncDictionary}
  */
-export default class FunctionDict {
+export default class FunctionDictionary {
   /**
    * @param {Function} fn
    * @param {any[]} [domain]

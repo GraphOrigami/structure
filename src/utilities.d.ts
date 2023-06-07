@@ -1,10 +1,10 @@
-/// <reference path="AsyncDict.ts"/>
+/// <reference path="AsyncDictionary.ts"/>
 
 export default class utilities {
-  static clear(AsyncDict: AsyncStore): Promise<void>;
-  static delete(AsyncDict: AsyncStore, key: any): Promise<boolean>;
-  static entries(AsyncDict: AsyncDict): Promise<IterableIterator<any>>;
-  static forEach(AsyncDict: AsyncDict, callbackfn: (value: any, key: any) => Promise<void>): Promise<void>;
-  static has(AsyncDict: AsyncDict, key: any): Promise<boolean>;
-  static values(AsyncDict: AsyncDict): Promise<IterableIterator<any>>;
+  static clear(AsyncDictionary: AsyncMutableDictionary): Promise<void>;
+  static delete(AsyncDictionary: AsyncMutableDictionary, key: any): Promise<boolean>;
+  static entries(AsyncDictionary: AsyncDictionary): Promise<IterableIterator<any>>;
+  static forEach(AsyncDictionary: AsyncDictionary, callbackfn: (value: any, key: any) => Promise<void>): Promise<void>;
+  static has(AsyncDictionary: AsyncDictionary, key: any): Promise<boolean>;
+  static values(AsyncDictionary: AsyncDictionary): Promise<IterableIterator<any>>;
 }

@@ -1,7 +1,7 @@
 /**
  * A read-only asynchronous key-value dictionary
  */
-interface AsyncDict {
+interface AsyncDictionary {
   get(key: any): Promise<any>;
   keys(): Promise<Iterable<any>>;
   // isKeyExplorable?(key: any): Promise<boolean>;
@@ -11,7 +11,7 @@ interface AsyncDict {
 /**
  * A read-write asynchronous key-value store.
  */
-interface AsyncStore extends AsyncDict {
+interface AsyncMutableDictionary extends AsyncDictionary {
   set(key: any, value: any): Promise<this>;
   // onChange
 }

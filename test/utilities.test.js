@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import test from "node:test";
-import ObjectDict from "../src/ObjectDict.js";
+import ObjectDictionary from "../src/ObjectDictionary.js";
 import utilities from "../src/utilities.js";
 
 test("entries returns the [key, value] pairs", async () => {
@@ -61,7 +61,7 @@ test("delete removes a value", async () => {
 });
 
 function objectStore() {
-  return new ObjectDict({
+  return new ObjectDictionary({
     "Alice.md": "Hello, **Alice**.",
     "Bob.md": "Hello, **Bob**.",
     "Carol.md": "Hello, **Carol**.",

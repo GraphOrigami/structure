@@ -2,9 +2,9 @@ import * as fs from "node:fs/promises";
 import path from "node:path";
 
 /**
- * @implements {AsyncStore}
+ * @implements {AsyncMutableDictionary}
  */
-export default class FolderDict {
+export default class FolderDictionary {
   /**
    * @param {string} dirname
    */
