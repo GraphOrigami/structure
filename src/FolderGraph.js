@@ -4,7 +4,7 @@ import path from "node:path";
 /**
  * @implements {AsyncMutableDictionary}
  */
-export default class FolderDictionary {
+export default class FolderGraph {
   /**
    * @param {string} dirname
    */

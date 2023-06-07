@@ -1,7 +1,7 @@
 /**
  * @implements {AsyncMutableDictionary}
  */
-export default class ObjectDictionary {
+export default class ObjectGraph {
   /**
    * Create an explorable graph wrapping a given plain object or array.
    *

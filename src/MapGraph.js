@@ -1,7 +1,7 @@
 /**
  * @implements {AsyncMutableDictionary}
  */
-export default class MapDictionary {
+export default class MapGraph {
   map;
 
   /**

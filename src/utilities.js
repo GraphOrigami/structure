@@ -4,23 +4,23 @@
  */
 export default class utilities {
   /**
-   * @param {AsyncMutableDictionary} AsyncDictionary
+   * @param {AsyncMutableDictionary} dictionary
    */
-  static async clear(AsyncDictionary) {
+  static async clear(dictionary) {
     // @ts-ignore
-    for (const key of await AsyncDictionary.keys()) {
-      await AsyncDictionary.set(key, undefined);
+    for (const key of await dictionary.keys()) {
+      await dictionary.set(key, undefined);
     }
   }
 
   /**
-   * @param {AsyncMutableDictionary} AsyncDictionary
+   * @param {AsyncMutableDictionary} dictionary
    * @param {any} key
    */
-  static async delete(AsyncDictionary, key) {
-    const exists = await this.has(AsyncDictionary, key);
+  static async delete(dictionary, key) {
+    const exists = await this.has(dictionary, key);
     if (exists) {
-      await AsyncDictionary.set(key, undefined);
+      await dictionary.set(key, undefined);
       return true;
     } else {
       return false;
@@ -28,50 +28,50 @@ export default class utilities {
   }
 
   /**
-   * @param {AsyncDictionary} AsyncDictionary
+   * @param {AsyncDictionary} dictionary
    */
-  static async entries(AsyncDictionary) {
+  static async entries(dictionary) {
     const result = [];
     // @ts-ignore
-    for (const key of await AsyncDictionary.keys()) {
-      const value = await AsyncDictionary.get(key);
+    for (const key of await dictionary.keys()) {
+      const value = await dictionary.get(key);
       result.push([key, value]);
     }
     return result;
   }
 
   /**
-   * @param {AsyncDictionary} AsyncDictionary
+   * @param {AsyncDictionary} dictionary
    * @param {Function} callbackFn
    */
-  static async forEach(AsyncDictionary, callbackFn) {
+  static async forEach(dictionary, callbackFn) {
     const promises = [];
     // @ts-ignore
-    for (const key of await AsyncDictionary.keys()) {
-      const promise = AsyncDictionary.get(key).then((value) =>
-        callbackFn(value, key)
-      );
+    for (const key of await dictionary.keys()) {
+      const promise = dictionary
+        .get(key)
+        .then((value) => callbackFn(value, key));
       promises.push(promise);
     }
     await Promise.all(promises);
   }
 
   /**
-   * @param {AsyncDictionary} AsyncDictionary
+   * @param {AsyncDictionary} dictionary
    */
-  static async has(AsyncDictionary, key) {
-    const value = await AsyncDictionary.get(key);
+  static async has(dictionary, key) {
+    const value = await dictionary.get(key);
     return value !== undefined;
   }
 
   /**
-   * @param {AsyncDictionary} AsyncDictionary
+   * @param {AsyncDictionary} dictionary
    */
-  static async values(AsyncDictionary) {
+  static async values(dictionary) {
     const result = [];
     // @ts-ignore
-    for (const key of await AsyncDictionary.keys()) {
-      const value = await AsyncDictionary.get(key);
+    for (const key of await dictionary.keys()) {
+      const value = await dictionary.get(key);
       result.push(value);
     }
     return result;

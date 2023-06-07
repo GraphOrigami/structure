@@ -1,7 +1,7 @@
 /**
  * @implements {AsyncDictionary}
  */
-export default class FunctionDictionary {
+export default class FunctionGraph {
   /**
    * @param {Function} fn
    * @param {any[]} [domain]
