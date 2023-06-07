@@ -1,5 +1,5 @@
 {
-  "name": "@graphorigami/types",
+  "name": "@graphorigami/async-dictionary",
   "version": "0.0.1",
   "type": "module",
   "types": "./index.d.ts",

@@ -1,4 +1,4 @@
-import type { AsyncDictionary, AsyncMutableDictionary } from "@graphorigami/types";
+import type { AsyncDictionary, AsyncMutableDictionary } from "@graphorigami/async-dictionary";
 
 export default class utilities {
   static clear(AsyncDictionary: AsyncMutableDictionary): Promise<void>;

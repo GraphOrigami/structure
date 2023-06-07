@@ -1,5 +1,5 @@
 /**
- * @typedef {import("@graphorigami/types").AsyncMutableDictionary} AsyncMutableDictionary
+ * @typedef {import("@graphorigami/async-dictionary").AsyncMutableDictionary} AsyncMutableDictionary
  * @implements {AsyncMutableDictionary}
  */
 export default class ObjectGraph {

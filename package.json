@@ -2,10 +2,11 @@
   "name": "structure",
   "version": "0.0.1",
   "workspaces": [
-    "packages/core",
-    "packages/types"
+    "packages/async-dictionary",
+    "packages/core"
   ],
   "scripts": {
-    "test": "node --test"
+    "test": "node --test",
+    "typecheck": "tsc"
   }
 }
