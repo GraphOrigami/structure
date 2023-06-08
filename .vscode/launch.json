@@ -9,8 +9,8 @@
       "request": "launch",
       "name": "Launch Program",
       "skipFiles": ["<node_internals>/**"],
-      // "program": "${workspaceFolder}/test/FunctionStore.test.js",
-      "args": ["--test"]
+      "args": ["--test"],
+      "outputCapture": "std"
     }
   ]
 }
