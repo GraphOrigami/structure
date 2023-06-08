@@ -1,4 +1,6 @@
 /**
+ * A dictionary backed by a Map.
+ *
  * @typedef {import("@graphorigami/async-dictionary").AsyncMutableDictionary} AsyncMutableDictionary
  * @implements {AsyncMutableDictionary}
  */

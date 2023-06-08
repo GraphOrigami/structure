@@ -2,6 +2,8 @@ import * as fs from "node:fs/promises";
 import path from "node:path";
 
 /**
+ * A file system folder as a graph of Buffers.
+ *
  * @typedef {import("@graphorigami/async-dictionary").AsyncMutableDictionary} AsyncMutableDictionary
  * @implements {AsyncMutableDictionary}
  */

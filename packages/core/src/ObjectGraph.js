@@ -1,10 +1,12 @@
 /**
+ * A graph defined by a plain object or array.
+ *
  * @typedef {import("@graphorigami/async-dictionary").AsyncMutableDictionary} AsyncMutableDictionary
  * @implements {AsyncMutableDictionary}
  */
 export default class ObjectGraph {
   /**
-   * Create an explorable graph wrapping a given plain object or array.
+   * Create a graph wrapping a given plain object or array.
    *
    * @param {any} object The object/array to wrap.
    */

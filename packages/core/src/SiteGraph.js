@@ -1,4 +1,6 @@
 /**
+ * An HTTP/HTTPS site as a graph of Buffers.
+ *
  * @typedef {import("@graphorigami/async-dictionary").AsyncDictionary} AsyncDictionary
  * @implements {AsyncDictionary}
  */

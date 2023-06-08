@@ -1,10 +1,12 @@
 /**
+ * A graph defined by a function and an optional domain.
+ *
  * @typedef {import("@graphorigami/async-dictionary").AsyncDictionary} AsyncDictionary
  * @implements {AsyncDictionary}
  */
 export default class FunctionGraph {
   /**
-   * @param {function} fn the function to be explored
+   * @param {function} fn the key->value function
    * @param {Iterable<any>} [domain] optional domain of the function
    */
   constructor(fn, domain = []) {
