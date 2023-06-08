@@ -34,6 +34,22 @@ test("has returns true if the key exists", async () => {
   assert.equal(await utilities.has(fixture, "David.md"), false);
 });
 
+test("isAsyncDictionary returns true if the object is a dictionary", () => {
+  assert.equal(utilities.isAsyncDictionary({}), false);
+  assert.equal(utilities.isAsyncDictionary(objectStore()), true);
+});
+
+test("isAsyncMutableDictionary returns true if the object is a mutable dictionary", () => {
+  assert.equal(
+    utilities.isAsyncMutableDictionary({
+      get() {},
+      keys() {},
+    }),
+    false
+  );
+  assert.equal(utilities.isAsyncMutableDictionary(objectStore()), true);
+});
+
 test("values returns the store's values", async () => {
   const fixture = objectStore();
   assert.deepEqual(

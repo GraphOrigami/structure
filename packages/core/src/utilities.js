@@ -63,10 +63,35 @@ export default class utilities {
 
   /**
    * @param {AsyncDictionary} dictionary
+   * @param {any} key
    */
   static async has(dictionary, key) {
     const value = await dictionary.get(key);
     return value !== undefined;
+  }
+
+  /**
+   * Return true if the object is an AsyncDictionary.
+   *
+   * @param {any} object
+   * @returns {boolean}
+   */
+  static isAsyncDictionary(object) {
+    return (
+      object !== null &&
+      typeof object.get === "function" &&
+      typeof object.keys === "function"
+    );
+  }
+
+  /**
+   * Return true if the object is an AsyncMutableDictionary.
+   *
+   * @param {any} object
+   * @returns {boolean}
+   */
+  static isAsyncMutableDictionary(object) {
+    return this.isAsyncDictionary(object) && typeof object.set === "function";
   }
 
   /**
