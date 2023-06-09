@@ -36,13 +36,9 @@ export default class utilities {
    * @param {AsyncDictionary} dictionary
    */
   static async entries(dictionary) {
-    const result = [];
-    // @ts-ignore
-    for (const key of await dictionary.keys()) {
-      const value = await dictionary.get(key);
-      result.push([key, value]);
-    }
-    return result;
+    const keys = [...(await dictionary.keys())];
+    const promises = keys.map(async (key) => [key, await dictionary.get(key)]);
+    return Promise.all(promises);
   }
 
   /**
@@ -50,14 +46,11 @@ export default class utilities {
    * @param {Function} callbackFn
    */
   static async forEach(dictionary, callbackFn) {
-    const promises = [];
-    // @ts-ignore
-    for (const key of await dictionary.keys()) {
-      const promise = dictionary
-        .get(key)
-        .then((value) => callbackFn(value, key));
-      promises.push(promise);
-    }
+    const keys = [...(await dictionary.keys())];
+    const promises = keys.map(async (key) => {
+      const value = await dictionary.get(key);
+      return callbackFn(value, key);
+    });
     await Promise.all(promises);
   }
 
@@ -95,15 +88,13 @@ export default class utilities {
   }
 
   /**
+   * Return the values in the dictionary.
+   *
    * @param {AsyncDictionary} dictionary
    */
   static async values(dictionary) {
-    const result = [];
-    // @ts-ignore
-    for (const key of await dictionary.keys()) {
-      const value = await dictionary.get(key);
-      result.push(value);
-    }
-    return result;
+    const keys = [...(await dictionary.keys())];
+    const promises = keys.map(async (key) => dictionary.get(key));
+    return Promise.all(promises);
   }
 }

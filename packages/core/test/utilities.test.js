@@ -18,15 +18,15 @@ describe("utilities", () => {
 
   test("forEach invokes a callback for each entry", async () => {
     const fixture = objectStore();
-    const entries = [];
+    const results = {};
     await utilities.forEach(fixture, async (value, key) => {
-      entries.push([key, value]);
+      results[key] = value;
     });
-    assert.deepEqual(entries, [
-      ["Alice.md", "Hello, **Alice**."],
-      ["Bob.md", "Hello, **Bob**."],
-      ["Carol.md", "Hello, **Carol**."],
-    ]);
+    assert.deepEqual(results, {
+      "Alice.md": "Hello, **Alice**.",
+      "Bob.md": "Hello, **Bob**.",
+      "Carol.md": "Hello, **Carol**.",
+    });
   });
 
   test("has returns true if the key exists", async () => {
