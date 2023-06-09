@@ -96,18 +96,13 @@ export default class SiteGraph {
       }
     }
 
-    let buffer = await response.arrayBuffer();
-    // if (buffer instanceof ArrayBuffer) {
-    //   // Patch the ArrayBuffer to give it more useful toString that decodes
-    //   // the buffer as UTF-8, like Node's Buffer class does.
-    //   buffer.toString = function () {
-    //     return new TextDecoder().decode(this);
-    //   };
-    // }
-
-    // HACK: Use Node Buffer everywhere for now.
+    const buffer = await response.arrayBuffer();
     if (buffer instanceof ArrayBuffer) {
-      buffer = Buffer.from(buffer);
+      // Patch the ArrayBuffer to give it a more useful toString that decodes
+      // the buffer as UTF-8, like Node's Buffer class does.
+      buffer.toString = function () {
+        return new TextDecoder().decode(this);
+      };
     }
 
     return buffer;

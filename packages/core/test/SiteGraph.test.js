@@ -5,11 +5,16 @@ import SiteGraph from "../src/SiteGraph.js";
 const mockHost = "https://mock";
 
 const mockResponses = {
+  "/.keys.json": {
+    data: JSON.stringify(["Alice.html", "Bob.html", "Carol.html"]),
+  },
   "/Alice.html": {
     data: "Hello, Alice!",
   },
-  "/.keys.json": {
-    data: JSON.stringify(["Alice.html", "Bob.html", "Carol.html"]),
+  "/about": {
+    redirected: true,
+    status: 301,
+    url: "https://mock/about/",
   },
 };
 
@@ -34,6 +39,12 @@ describe("SiteGraph", () => {
     const fixture = new SiteGraph(mockHost);
     assert.equal(await fixture.get("xyz"), undefined);
   });
+
+  test("a redirect on a site with keys returns a SiteGraph for the new URL", async () => {
+    const fixture = new SiteGraph(mockHost);
+    const about = await fixture.get("about");
+    assert.equal(about.href, "https://mock/about/");
+  });
 });
 
 async function mockFetch(href) {
@@ -42,16 +53,20 @@ async function mockFetch(href) {
   }
   const path = href.slice(mockHost.length);
   const mockedResponse = mockResponses[path];
-  return mockedResponse
-    ? {
+  if (mockedResponse) {
+    return Object.assign(
+      {
         // Returns a Buffer, not an ArrayBuffer
         arrayBuffer: () => Buffer.from(mockedResponse.data),
-        ok: mockedResponse.ok ?? true,
-        status: mockedResponse.status ?? 200,
+        ok: true,
+        status: 200,
         text: () => mockedResponse.data,
-      }
-    : {
-        ok: false,
-        status: 404,
-      };
+      },
+      mockedResponse
+    );
+  }
+  return {
+    ok: false,
+    status: 404,
+  };
 }
