@@ -5,8 +5,6 @@
  * @implements {AsyncMutableDictionary}
  */
 export default class MapDictionary {
-  map;
-
   /**
    * @param {Iterable} [iterable]
    */
