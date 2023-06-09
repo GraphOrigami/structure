@@ -1,5 +1,5 @@
 /**
- * An HTTP/HTTPS site as a graph of Buffers.
+ * An HTTP/HTTPS site as a graph of ArrayBuffers.
  *
  * @typedef {import("@graphorigami/async-dictionary").AsyncDictionary} AsyncDictionary
  * @implements {AsyncDictionary}
