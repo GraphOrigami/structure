@@ -7,7 +7,7 @@
     "typescript": "5.0.4"
   },
   "dependencies": {
-    "@graphorigami/async-dictionary": "0.0.1"
+    "@graphorigami/types": "0.0.1"
   },
   "scripts": {
     "test": "node --test",

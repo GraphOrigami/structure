@@ -1,7 +1,7 @@
 /**
  * A graph defined by a plain object or array.
  *
- * @typedef {import("@graphorigami/async-dictionary").AsyncMutableGraph} AsyncMutableGraph
+ * @typedef {import("@graphorigami/types").AsyncMutableGraph} AsyncMutableGraph
  * @implements {AsyncMutableGraph}
  */
 export default class ObjectGraph {

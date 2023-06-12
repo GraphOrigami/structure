@@ -1,7 +1,7 @@
 /**
  * A graph defined by a function and an optional domain.
  *
- * @typedef {import("@graphorigami/async-dictionary").AsyncGraph} AsyncGraph
+ * @typedef {import("@graphorigami/types").AsyncGraph} AsyncGraph
  * @implements {AsyncGraph}
  */
 export default class FunctionGraph {

@@ -4,7 +4,7 @@ import path from "node:path";
 /**
  * A file system folder as a graph of Buffers.
  *
- * @typedef {import("@graphorigami/async-dictionary").AsyncMutableGraph} AsyncMutableGraph
+ * @typedef {import("@graphorigami/types").AsyncMutableGraph} AsyncMutableGraph
  * @implements {AsyncMutableGraph}
  */
 export default class FolderGraph {

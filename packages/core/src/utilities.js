@@ -1,6 +1,6 @@
 /**
- * @typedef {import("@graphorigami/async-dictionary").AsyncDictionary} AsyncDictionary
- * @typedef {import("@graphorigami/async-dictionary").AsyncMutableDictionary} AsyncMutableDictionary
+ * @typedef {import("@graphorigami/types").AsyncDictionary} AsyncDictionary
+ * @typedef {import("@graphorigami/types").AsyncMutableDictionary} AsyncMutableDictionary
  */
 
 /**

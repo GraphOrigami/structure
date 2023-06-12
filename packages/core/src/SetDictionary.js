@@ -3,7 +3,7 @@
  *
  * This treats the set as an array, useing the integer indexes as keys.
  *
- * @typedef {import("@graphorigami/async-dictionary").AsyncDictionary} AsyncDictionary
+ * @typedef {import("@graphorigami/types").AsyncDictionary} AsyncDictionary
  * @implements {AsyncDictionary}
  */
 export default class SetDictionary {
