@@ -1,8 +1,8 @@
 import assert from "node:assert";
 import { describe, test } from "node:test";
-import ObjectDictionary from "../src/ObjectDictionary.js";
+import FunctionDictionary from "../src/FunctionDictionary.js";
 
-describe("ObjectDictionary", () => {
+describe("FunctionDictionary", async () => {
   test("can get the keys of the graph", async () => {
     const fixture = createFixture();
     assert.deepEqual(
@@ -24,9 +24,14 @@ describe("ObjectDictionary", () => {
 });
 
 function createFixture() {
-  return new ObjectDictionary({
-    "Alice.md": "Hello, **Alice**.",
-    "Bob.md": "Hello, **Bob**.",
-    "Carol.md": "Hello, **Carol**.",
-  });
+  return new FunctionDictionary(
+    (key) => {
+      if (key.endsWith(".md")) {
+        const name = key.slice(0, -3);
+        return `Hello, **${name}**.`;
+      }
+      return undefined;
+    },
+    ["Alice.md", "Bob.md", "Carol.md"]
+  );
 }
