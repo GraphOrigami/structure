@@ -6,6 +6,11 @@
 /**
  * This class implements utilities methods like `entries()` that can be defined
  * in terms of other methods like `keys()` and `get()`.
+ *
+ * This collection of utilities is defined as a class with static methods,
+ * rather than a module with multiple exports, so that it include a method
+ * called `delete`. In JavaScript, `delete` is a reserved word, so can't be used
+ * as the name of an export.
  */
 export default class utilities {
   /**
