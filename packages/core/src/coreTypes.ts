@@ -1,12 +1,12 @@
 import type { AsyncDictionary } from "@graphorigami/types";
 
-export interface HasGraph {
-  toGraph(): AsyncDictionary;
-}
-
 export type PlainObject = {
   [key: string]: any;
 };
+
+export interface HasGraph {
+  toGraph(): AsyncDictionary;
+}
 
 export type GraphVariant =
   Array<any> | 

@@ -1,13 +1,13 @@
 import GraphHelpers from "./GraphHelpers.js";
-import MapDictionary from "./MapDictionary.js";
+import SetDictionary from "./SetDictionary.js";
 
 /**
- * A graph of Map objects.
+ * A graph of Set objects.
  *
- * @typedef {import("@graphorigami/types").AsyncMutableGraph} AsyncMutableGraph
- * @implements {AsyncMutableGraph}
+ * @typedef {import("@graphorigami/types").AsyncGraph} AsyncGraph
+ * @implements {AsyncGraph}
  */
-export default class MapGraph extends MapDictionary {
+export default class SetGraph extends SetDictionary {
   async get(key) {
     let value = await super.get(key);
     if (GraphHelpers.isAsyncDictionary(value)) {
