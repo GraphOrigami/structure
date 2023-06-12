@@ -4,6 +4,4 @@
 export default interface AsyncDictionary {
   get(key: any): Promise<any>;
   keys(): Promise<Iterable<any>>;
-  // isKeyExplorable?(key: any): Promise<boolean>;
-  // traverse?(...keys: any[]): Promise<any>;
 }

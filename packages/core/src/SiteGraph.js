@@ -1,8 +1,8 @@
 /**
  * An HTTP/HTTPS site as a graph of ArrayBuffers.
  *
- * @typedef {import("@graphorigami/async-dictionary").AsyncDictionary} AsyncDictionary
- * @implements {AsyncDictionary}
+ * @typedef {import("@graphorigami/async-dictionary").AsyncGraph} AsyncGraph
+ * @implements {AsyncGraph}
  */
 export default class SiteGraph {
   /**
