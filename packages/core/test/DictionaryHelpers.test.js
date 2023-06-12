@@ -5,7 +5,7 @@ import ObjectGraph from "../src/ObjectGraph.js";
 
 describe("DictionaryHelpers", () => {
   test("entries returns the [key, value] pairs", async () => {
-    const fixture = objectStore();
+    const fixture = createFixture();
     assert.deepEqual(
       [...(await DictionaryHelpers.entries(fixture))],
       [
@@ -17,7 +17,7 @@ describe("DictionaryHelpers", () => {
   });
 
   test("forEach invokes a callback for each entry", async () => {
-    const fixture = objectStore();
+    const fixture = createFixture();
     const results = {};
     await DictionaryHelpers.forEach(fixture, async (value, key) => {
       results[key] = value;
@@ -36,14 +36,30 @@ describe("DictionaryHelpers", () => {
   });
 
   test("has returns true if the key exists", async () => {
-    const fixture = objectStore();
+    const fixture = createFixture();
     assert.equal(await DictionaryHelpers.has(fixture, "Alice.md"), true);
     assert.equal(await DictionaryHelpers.has(fixture, "David.md"), false);
   });
 
   test("isAsyncDictionary returns true if the object is a dictionary", () => {
-    assert.equal(DictionaryHelpers.isAsyncDictionary({}), false);
-    assert.equal(DictionaryHelpers.isAsyncDictionary(objectStore()), true);
+    const missingGetAndKeys = {};
+    assert(!DictionaryHelpers.isAsyncDictionary(missingGetAndKeys));
+
+    const missingIterator = {
+      async get() {},
+    };
+    assert(!DictionaryHelpers.isAsyncDictionary(missingIterator));
+
+    const missingGet = {
+      async keys() {},
+    };
+    assert(!DictionaryHelpers.isAsyncDictionary(missingGet));
+
+    const hasGetAndKeys = {
+      async get() {},
+      async keys() {},
+    };
+    assert(DictionaryHelpers.isAsyncDictionary(hasGetAndKeys));
   });
 
   test("isAsyncMutableDictionary returns true if the object is a mutable dictionary", () => {
@@ -55,7 +71,7 @@ describe("DictionaryHelpers", () => {
       false
     );
     assert.equal(
-      DictionaryHelpers.isAsyncMutableDictionary(objectStore()),
+      DictionaryHelpers.isAsyncMutableDictionary(createFixture()),
       true
     );
   });
@@ -68,7 +84,7 @@ describe("DictionaryHelpers", () => {
   });
 
   test("values returns the store's values", async () => {
-    const fixture = objectStore();
+    const fixture = createFixture();
     assert.deepEqual(
       [...(await DictionaryHelpers.values(fixture))],
       ["Hello, **Alice**.", "Hello, **Bob**.", "Hello, **Carol**."]
@@ -76,13 +92,13 @@ describe("DictionaryHelpers", () => {
   });
 
   test("clear removes all values", async () => {
-    const fixture = objectStore();
+    const fixture = createFixture();
     await DictionaryHelpers.clear(fixture);
     assert.deepEqual([...(await DictionaryHelpers.entries(fixture))], []);
   });
 
   test("delete removes a value", async () => {
-    const fixture = objectStore();
+    const fixture = createFixture();
     await DictionaryHelpers.delete(fixture, "Alice.md");
     assert.deepEqual(
       [...(await DictionaryHelpers.entries(fixture))],
@@ -94,7 +110,7 @@ describe("DictionaryHelpers", () => {
   });
 });
 
-function objectStore() {
+function createFixture() {
   return new ObjectGraph({
     "Alice.md": "Hello, **Alice**.",
     "Bob.md": "Hello, **Bob**.",
