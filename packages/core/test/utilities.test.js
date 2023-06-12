@@ -29,6 +29,12 @@ describe("utilities", () => {
     });
   });
 
+  test("getRealmObjectPrototype returns the object's root prototype", () => {
+    const obj = new ObjectGraph({});
+    const proto = utilities.getRealmObjectPrototype(obj);
+    assert.equal(proto, Object.prototype);
+  });
+
   test("has returns true if the key exists", async () => {
     const fixture = objectStore();
     assert.equal(await utilities.has(fixture, "Alice.md"), true);
@@ -49,6 +55,13 @@ describe("utilities", () => {
       false
     );
     assert.equal(utilities.isAsyncMutableDictionary(objectStore()), true);
+  });
+
+  test("isPlainObject returns true if the object is a plain object", () => {
+    assert.equal(utilities.isPlainObject({}), true);
+    assert.equal(utilities.isPlainObject(new Object()), true);
+    assert.equal(utilities.isPlainObject(Object.create(null)), true);
+    assert.equal(utilities.isPlainObject(new ObjectGraph({})), false);
   });
 
   test("values returns the store's values", async () => {

@@ -60,6 +60,22 @@ export default class utilities {
   }
 
   /**
+   * Return the Object prototype at the root of the object's prototype chain.
+   *
+   * This is used by functions like isPlainObject() to handle cases where the
+   * `Object` at the root prototype chain is in a different realm.
+   *
+   * @param {any} obj
+   */
+  static getRealmObjectPrototype(obj) {
+    let proto = obj;
+    while (Object.getPrototypeOf(proto) !== null) {
+      proto = Object.getPrototypeOf(proto);
+    }
+    return proto;
+  }
+
+  /**
    * @param {AsyncDictionary} dictionary
    * @param {any} key
    */
@@ -90,6 +106,31 @@ export default class utilities {
    */
   static isAsyncMutableDictionary(object) {
     return this.isAsyncDictionary(object) && typeof object.set === "function";
+  }
+
+  /**
+   * Return true if the object is a plain JavaScript object created by `{}`,
+   * `new Object()`, or `Object.create(null)`.
+   *
+   * This function also considers object-like things with no prototype (like a
+   * `Module`) as plain objects.
+   *
+   * @param {any} obj
+   */
+  static isPlainObject(obj) {
+    // From https://stackoverflow.com/q/51722354/76472
+    if (typeof obj !== "object" || obj === null) {
+      return false;
+    }
+
+    // We treat object-like things with no prototype (like a Module) as plain
+    // objects.
+    if (Object.getPrototypeOf(obj) === null) {
+      return true;
+    }
+
+    // Do we inherit directly from Object in this realm?
+    return Object.getPrototypeOf(obj) === this.getRealmObjectPrototype(obj);
   }
 
   /**
