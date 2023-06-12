@@ -2,7 +2,7 @@ import assert from "node:assert";
 import { describe, test } from "node:test";
 import object from "./fixtures/object.js";
 
-describe("ObjectGraph", () => {
+describe("ObjectDictionary", () => {
   test("can get the keys of the graph", async () => {
     assert.deepEqual(
       [...(await object.keys())],

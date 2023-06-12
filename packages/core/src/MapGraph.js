@@ -1,5 +1,5 @@
+import GraphHelpers from "./GraphHelpers.js";
 import MapDictionary from "./MapDictionary.js";
-import utilities from "./utilities.js";
 
 /**
  * A dictionary backed by a Map.
@@ -10,7 +10,7 @@ import utilities from "./utilities.js";
 export default class MapGraph extends MapDictionary {
   async get(key) {
     let value = await super.get(key);
-    if (utilities.isAsyncDictionary(value)) {
+    if (GraphHelpers.isAsyncDictionary(value)) {
       value = Reflect.construct(this.constructor, [value]);
     }
     return value;

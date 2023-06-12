@@ -12,7 +12,7 @@
  * called `delete`. In JavaScript, `delete` is a reserved word, so can't be used
  * as the name of an export.
  */
-export default class utilities {
+export default class DictionaryHelpers {
   /**
    * @param {AsyncMutableDictionary} dictionary
    */
@@ -92,7 +92,7 @@ export default class utilities {
    */
   static isAsyncDictionary(object) {
     return (
-      object !== null &&
+      object &&
       typeof object.get === "function" &&
       typeof object.keys === "function"
     );
