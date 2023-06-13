@@ -75,13 +75,9 @@ export default class GraphHelpers extends DictionaryHelpers {
    * explorable value.
    *
    * This defers to the graph's own isKeyForSubgraph method. If not found, this
-   * gets the value of that key and returns true if the value is in fact
-   * explorable.
+   * gets the value of that key and returns true if the value is an async
+   * dictionary.
    */
-  // REVIEW: The name of this suggests that it examines whether the key itself
-  // is explorable, but really it's the value that matters. Calling this
-  // `isValueExplorable`, on the other hand, makes it sound like it takes a
-  // value argument instead of a key.
   static async isKeyForSubgraph(graph, key) {
     if (graph.isKeyForSubgraph) {
       return graph.isKeyForSubgraph(key);
@@ -153,8 +149,7 @@ export default class GraphHelpers extends DictionaryHelpers {
   }
 
   /**
-   * Converts an asynchronous explorable graph into a synchronous plain
-   * JavaScript object.
+   * Converts an asynchronous graph into a synchronous plain JavaScript object.
    *
    * The result's keys will be the graph's keys cast to strings. Any graph value
    * that is itself a graph will be similarly converted to a plain object.
@@ -168,8 +163,7 @@ export default class GraphHelpers extends DictionaryHelpers {
       for (let i = 0; i < keys.length; i++) {
         obj[keys[i]] = values[i];
       }
-      const result = castArrayLike(obj);
-      return result;
+      return castArrayLike(obj);
     });
   }
 
@@ -181,7 +175,7 @@ export default class GraphHelpers extends DictionaryHelpers {
    */
   static async traverse(variant, ...keys) {
     try {
-      // Await the result here so that, if the file doesn't exist, the catch
+      // Await the result here so that, if the path doesn't exist, the catch
       // block below will catch the exception.
       return await this.traverseOrThrow(variant, ...keys);
     } catch (/** @type {any} */ error) {
@@ -216,9 +210,8 @@ export default class GraphHelpers extends DictionaryHelpers {
         );
       }
 
-      // If the value isn't already explorable, cast it to an explorable graph.
-      // If someone is trying to call `get` on this thing, they mean to treat it
-      // as an explorable graph.
+      // If someone is trying to traverse this thing, they mean to treat it as a
+      // graph. If it's not already a graph, cast it to one.
       const graph = this.from(value);
 
       // If the graph supports the traverse() method, pass the remaining keys
@@ -248,8 +241,8 @@ export default class GraphHelpers extends DictionaryHelpers {
   }
 }
 
-// If the given plain object has only integer keys, return it as an array.
-// Otherwise return it as is.
+// If the given plain object has only sequential integer keys, return it as an
+// array. Otherwise return it as is.
 function castArrayLike(obj) {
   let hasKeys = false;
   let expectedIndex = 0;
@@ -265,6 +258,7 @@ function castArrayLike(obj) {
   return hasKeys ? Object.values(obj) : obj;
 }
 
+// Error class thrown by traverseOrThrow()
 class TraverseError extends ReferenceError {
   constructor(message, graph, keys) {
     super(message);
