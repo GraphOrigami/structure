@@ -83,7 +83,7 @@ export default class GraphHelpers extends DictionaryHelpers {
       return graph.isKeyForSubgraph(key);
     }
     const value = await graph.get(key);
-    return this.isAsyncDictionary(value);
+    return this.isGraphable(value);
   }
 
   /**

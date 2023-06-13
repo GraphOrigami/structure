@@ -16,4 +16,22 @@ describe("ObjectGraph", () => {
     const b = await more.get("b");
     assert.equal(b, 2);
   });
+
+  test("isKeyForSubgraph() indicates which values are subgraphs", async () => {
+    const graph = new ObjectGraph({
+      a1: 1,
+      a2: {
+        b1: 2,
+      },
+      a3: 3,
+      a4: {
+        b2: 4,
+      },
+    });
+    const keys = Array.from(await graph.keys());
+    const valuesExplorable = await Promise.all(
+      keys.map(async (key) => await graph.isKeyForSubgraph(key))
+    );
+    assert.deepEqual(valuesExplorable, [false, true, false, true]);
+  });
 });

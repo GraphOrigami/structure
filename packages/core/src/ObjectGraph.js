@@ -15,4 +15,9 @@ export default class ObjectGraph extends ObjectDictionary {
     }
     return value;
   }
+
+  async isKeyForSubgraph(key) {
+    const value = this.object[key];
+    return GraphHelpers.isGraphable(value);
+  }
 }

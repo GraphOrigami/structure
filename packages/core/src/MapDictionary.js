@@ -13,7 +13,9 @@ export default class MapDictionary {
   }
 
   async get(key) {
-    return this.map.get(key);
+    return key === undefined
+      ? this // Getting undefined returns the dictionary itself.
+      : this.map.get(key);
   }
 
   async keys() {

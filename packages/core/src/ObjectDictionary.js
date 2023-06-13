@@ -1,5 +1,5 @@
 /**
- * A graph defined by a plain object or array.
+ * A dictionary defined by a plain object or array.
  *
  * @typedef {import("@graphorigami/types").AsyncMutableDictionary} AsyncMutableDictionary
  * @implements {AsyncMutableDictionary}
@@ -21,7 +21,7 @@ export default class ObjectDictionary {
    */
   async get(key) {
     if (key === undefined) {
-      // Getting undefined returns the graph itself.
+      // Getting undefined returns the dictionary itself.
       return this;
     }
 

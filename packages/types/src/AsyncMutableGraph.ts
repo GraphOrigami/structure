@@ -1,7 +1,7 @@
-import AsyncDictionary from "./AsyncDictionary";
+import AsyncGraph from "./AsyncGraph";
 import AsyncMutable from "./AsyncMutable";
 
 /**
  * A read-write asynchronous key-value graph.
  */
-export default interface AsyncMutableDictionary extends AsyncDictionary, AsyncMutable {}
+export default interface AsyncMutableGraph extends AsyncGraph, AsyncMutable {}

@@ -15,7 +15,9 @@ export default class SetDictionary {
   }
 
   async get(key) {
-    return this.values[key];
+    return key === undefined
+      ? this // Getting undefined returns the dictionary itself.
+      : this.values[key];
   }
 
   async keys() {

@@ -16,6 +16,16 @@ export default class FolderGraph {
   }
 
   async get(key) {
+    if (key === undefined) {
+      // Getting undefined returns the graph itself.
+      return this;
+    }
+
+    // We define get(undefined) to be the graph itself. This lets an ori command
+    // like "ori folder/" with a trailing slash be equivalent to "ori folder".
+    if (key === undefined) {
+      return this;
+    }
     const filePath = path.resolve(this.dirname, key);
 
     let stats;
@@ -31,6 +41,12 @@ export default class FolderGraph {
     return stats.isDirectory()
       ? Reflect.construct(this.constructor, [filePath]) // Return subdirectory as a graph
       : fs.readFile(filePath); // Return file contents
+  }
+
+  async isKeyForSubgraph(key) {
+    const filePath = path.join(this.dirname, key);
+    const stats = await stat(filePath);
+    return stats ? stats.isDirectory() : false;
   }
 
   async keys() {
