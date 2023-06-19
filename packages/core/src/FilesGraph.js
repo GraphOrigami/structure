@@ -1,5 +1,6 @@
 import * as fs from "node:fs/promises";
 import path from "node:path";
+import GraphHelpers from "./GraphHelpers.js";
 
 // Names of OS-generated files that should not be enumerated
 const hiddenFileNames = {
@@ -77,7 +78,13 @@ export default class FilesGraph {
 
   async set(key, value) {
     // Where are we going to write this value?
-    const destPath = path.resolve(this.dirname, key ?? "");
+    const stringKey = key ? String(key) : "";
+    const destPath = path.resolve(this.dirname, stringKey);
+
+    const isStringOrBuffer =
+      typeof value === "string" ||
+      value instanceof String ||
+      value instanceof Buffer;
 
     if (value === undefined) {
       // Delete the file or directory.
@@ -97,16 +104,12 @@ export default class FilesGraph {
         // Delete file.
         await fs.unlink(destPath);
       }
-    }
-
-    const isExplorable =
-      typeof value?.get === "function" && typeof value?.keys === "function";
-
-    if (isExplorable) {
-      // Write out the contents of the value graph to the destination.
+    } else if (!isStringOrBuffer && GraphHelpers.isGraphable(value)) {
+      // Treat value as a graph and write it out as a subdirectory.
       const destGraph = Reflect.construct(this.constructor, [destPath]);
-      for (const subKey of await value.keys()) {
-        const subValue = await value.get(subKey);
+      const valueGraph = GraphHelpers.from(value);
+      for (const subKey of await valueGraph.keys()) {
+        const subValue = await valueGraph.get(subKey);
         await destGraph.set(subKey, subValue);
       }
     } else {
