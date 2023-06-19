@@ -8,7 +8,7 @@ export default class MapDictionary {
   /**
    * @param {Iterable} [iterable]
    */
-  constructor(iterable) {
+  constructor(iterable = []) {
     this.map = new Map(iterable);
   }
 
