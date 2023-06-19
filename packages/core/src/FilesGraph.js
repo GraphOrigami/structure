@@ -1,6 +1,11 @@
 import * as fs from "node:fs/promises";
 import path from "node:path";
 
+// Names of OS-generated files that should not be enumerated
+const hiddenFileNames = {
+  ".DS_Store": true,
+};
+
 /**
  * A file system tree as a graph of Buffers.
  *
@@ -49,8 +54,25 @@ export default class FilesGraph {
     return stats ? stats.isDirectory() : false;
   }
 
+  /**
+   * Enumerate the names of the files/subdirectories in this directory.
+   */
   async keys() {
-    return fs.readdir(this.dirname);
+    let entries;
+    try {
+      entries = await fs.readdir(this.dirname, { withFileTypes: true });
+    } catch (/** @type {any} */ error) {
+      if (error.code !== "ENOENT") {
+        throw error;
+      }
+      entries = [];
+    }
+
+    const names = entries.map((entry) => entry.name);
+
+    // Filter out unhelpful file names.
+    const filtered = names.filter((name) => !hiddenFileNames[name]);
+    return filtered;
   }
 
   async set(key, value) {
