@@ -51,6 +51,24 @@ describe("GraphHelpers", () => {
     assert(await GraphHelpers.isKeyForSubgraph(graph, "more"));
   });
 
+  test("map() maps values", async () => {
+    const graph = {
+      a: "Alice",
+      more: {
+        b: "Bob",
+      },
+    };
+    const mapped = await GraphHelpers.map(graph, (value) =>
+      value.toUpperCase()
+    );
+    assert.deepEqual(await GraphHelpers.plain(mapped), {
+      a: "ALICE",
+      more: {
+        b: "BOB",
+      },
+    });
+  });
+
   test("mapReduce() can map values and reduce them", async () => {
     const graph = {
       a: 1,

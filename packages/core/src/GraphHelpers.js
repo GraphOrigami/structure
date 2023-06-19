@@ -109,6 +109,30 @@ export default class GraphHelpers extends DictionaryHelpers {
   }
 
   /**
+   * Map the values of a graph.
+   *
+   * @param {GraphVariant} variant
+   * @param {Function} mapFn
+   */
+  static async map(variant, mapFn) {
+    const result = new Map();
+    const graph = this.from(variant);
+    const keys = Array.from(await graph.keys());
+    const promises = keys.map((key) =>
+      graph.get(key).then(async (value) => {
+        // If the value is a subgraph, recurse.
+        const fn = this.isAsyncDictionary(value)
+          ? this.map(value, mapFn)
+          : mapFn(value, key);
+        const mappedValue = await fn;
+        result.set(key, mappedValue);
+      })
+    );
+    await Promise.all(promises);
+    return new MapGraph(result);
+  }
+
+  /**
    * Map and reduce a graph.
    *
    * This is done in as parallel fashion as possible. Each of the graph's values

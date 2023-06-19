@@ -7,6 +7,7 @@ export default class GraphHelpers extends DictionaryHelpers {
   static isGraphable(obj: any): boolean;
   static isKeyForSubgraph(graph: AsyncGraph, obj: any): Promise<boolean>;
   static keysFromPath(path: string): string[];
+  static map(graph: GraphVariant, mapFn: (any) => any): Promise<AsyncGraph>;
   static mapReduce(graph: GraphVariant, mapFn: null|((any) => any|null), reduceFn: (any) => any): Promise<any>;
   static plain(graph: GraphVariant): Promise<PlainObject>;
   static traverse(graph: GraphVariant, ...keys: any[]): Promise<any>;
