@@ -1,4 +1,3 @@
-import GraphHelpers from "./GraphHelpers.js";
 import SetDictionary from "./SetDictionary.js";
 
 /**
@@ -10,7 +9,7 @@ import SetDictionary from "./SetDictionary.js";
 export default class SetGraph extends SetDictionary {
   async get(key) {
     let value = await super.get(key);
-    if (GraphHelpers.isAsyncDictionary(value)) {
+    if (value instanceof Set) {
       value = Reflect.construct(this.constructor, [value]);
     }
     return value;
