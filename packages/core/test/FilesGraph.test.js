@@ -2,11 +2,11 @@ import assert from "node:assert";
 import path from "node:path";
 import { describe, test } from "node:test";
 import { fileURLToPath } from "node:url";
-import FolderGraph from "../src/FolderGraph.js";
+import FilesGraph from "../src/FilesGraph.js";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
-describe("FolderGraph", async () => {
+describe("FilesGraph", async () => {
   test("can get the keys of the graph", async () => {
     const fixture = createFixture("fixtures/markdown");
     assert.deepEqual(
@@ -35,5 +35,5 @@ describe("FolderGraph", async () => {
 });
 
 function createFixture(fixturePath) {
-  return new FolderGraph(path.join(dirname, fixturePath));
+  return new FilesGraph(path.join(dirname, fixturePath));
 }

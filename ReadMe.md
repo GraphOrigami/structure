@@ -14,6 +14,6 @@ The `core` package includes classes that wrap various structures as asynchronous
 
 - `ObjectGraph`: wraps a plain JavaScript object
 - `MapDictionary`: wraps a (synchronous) JavaScript `Map`
-- `FolderGraph`: wraps a file system folder using the Node [fs](https://nodejs.org/api/fs.html) API
+- `FilesGraph`: wraps a file system tree using the Node [fs](https://nodejs.org/api/fs.html) API
 - `FunctionGraph`: wraps a JavaScript function
 - The package also includes utility functions that define the derivable `Map` methods in terms of the dictionary interface methods. For example, an `entries` function works like the `Map` [entries](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/entries) method.
