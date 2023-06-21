@@ -7,6 +7,11 @@ const hiddenFileNames = {
   ".DS_Store": true,
 };
 
+// Used for natural sort order
+const collator = new Intl.Collator(undefined, {
+  numeric: true,
+});
+
 /**
  * A file system tree as a graph of Buffers.
  *
@@ -69,11 +74,18 @@ export default class FilesGraph {
       entries = [];
     }
 
-    const names = entries.map((entry) => entry.name);
+    let names = entries.map((entry) => entry.name);
 
     // Filter out unhelpful file names.
-    const filtered = names.filter((name) => !hiddenFileNames[name]);
-    return filtered;
+    names = names.filter((name) => !hiddenFileNames[name]);
+
+    // Node fs.readdir sort order appears to be unreliable; see, e.g.,
+    // https://github.com/nodejs/node/issues/3232. That seems unhelpful for many
+    // applications. Since it's quite common for file names to include numbers,
+    // we use natural sort order: ["file1", "file9", "file10"] instead of
+    // ["file1", "file10", "file9"].
+    names.sort(collator.compare);
+    return names;
   }
 
   async set(key, value) {
