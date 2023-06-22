@@ -54,8 +54,8 @@ export default class GraphHelpers extends DictionaryHelpers {
    * - A `Set` instance
    * - A plain object
    *
-   * Note: the `from()` method also accepts any JavaScript object, but this
-   * method will return `false` for an object that isn't one of the above types.
+   * Note: the `from()` method accepts any JavaScript object, but `isGraphable`
+   * returns `false` for an object that isn't one of the above types.
    *
    * @param {any} obj
    */
