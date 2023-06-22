@@ -5,12 +5,50 @@ import MapGraph from "../src/MapGraph.js";
 import ObjectGraph from "../src/ObjectGraph.js";
 
 describe("GraphHelpers", () => {
-  test("isGraphable() returns true if the argument can be cast to an async graph", () => {
-    assert(!GraphHelpers.isGraphable(null));
-    assert(GraphHelpers.isGraphable({}));
-    assert(GraphHelpers.isGraphable([]));
-    assert(GraphHelpers.isGraphable(new Map()));
-    assert(GraphHelpers.isGraphable(new Set()));
+  test("assign applies one graph to another", async () => {
+    const target = new ObjectGraph({
+      a: 1,
+      b: 2,
+      more: {
+        d: 3,
+      },
+    });
+
+    const source = {
+      a: 4, // Overwrite existing value
+      b: undefined, // Delete
+      c: 5, // Add
+      more: {
+        // Should leave existing `more` keys alone.
+        e: 6, // Add
+      },
+      // Add new subgraph
+      extra: {
+        f: 7,
+      },
+    };
+
+    // Apply changes.
+    const result = await GraphHelpers.assign(target, source);
+
+    assert.equal(result, target);
+    assert.deepEqual(await GraphHelpers.plain(target), {
+      a: 4,
+      c: 5,
+      more: {
+        d: 3,
+        e: 6,
+      },
+      extra: {
+        f: 7,
+      },
+    });
+  });
+
+  test("assign can apply updates to an array", async () => {
+    const target = new ObjectGraph(["a", "b", "c"]);
+    await GraphHelpers.assign(target, ["d", "e"]);
+    assert.deepEqual(await GraphHelpers.plain(target), ["d", "e", "c"]);
   });
 
   test("from() returns an async graph as is", async () => {
@@ -38,6 +76,14 @@ describe("GraphHelpers", () => {
   test("keysFromPath() returns the keys from a slash-separated path", () => {
     assert.deepEqual(GraphHelpers.keysFromPath("a/b/c"), ["a", "b", "c"]);
     assert.deepEqual(GraphHelpers.keysFromPath("foo/"), ["foo", undefined]);
+  });
+
+  test("isGraphable() returns true if the argument can be cast to an async graph", () => {
+    assert(!GraphHelpers.isGraphable(null));
+    assert(GraphHelpers.isGraphable({}));
+    assert(GraphHelpers.isGraphable([]));
+    assert(GraphHelpers.isGraphable(new Map()));
+    assert(GraphHelpers.isGraphable(new Set()));
   });
 
   test("isKeyForSubgraph() returns true if the key is for a subgraph", async () => {

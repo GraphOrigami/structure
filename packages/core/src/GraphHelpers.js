@@ -10,8 +10,44 @@ import SetGraph from "./SetGraph.js";
  * @typedef {import("./coreTypes").GraphVariant} GraphVariant
  * @typedef {import("./coreTypes").PlainObject} PlainObject
  * @typedef {import("@graphorigami/types").AsyncGraph} AsyncGraph
+ * @typedef {import("@graphorigami/types").AsyncMutableDictionary} AsyncMutableDictionary
  */
 export default class GraphHelpers extends DictionaryHelpers {
+  /**
+   * Apply the key/values pairs from the source graph to the target graph.
+   *
+   * If a key exists in both graphs, and the values in both graphs are
+   * subgraphs, then the subgraphs will be merged recursively. Otherwise, the
+   * value from the source graph will overwrite the value in the target graph.
+   *
+   * @param {AsyncMutableDictionary} target
+   * @param {AsyncGraph} source
+   */
+  static async assign(target, source) {
+    const targetGraph = this.from(target);
+    const sourceGraph = this.from(source);
+    if (!this.isAsyncMutableDictionary(targetGraph)) {
+      throw new TypeError("Target must be a mutable asynchronous graph");
+    }
+    // Fire off requests to update all keys, then wait for all of them to finish.
+    const keys = Array.from(await sourceGraph.keys());
+    const promises = keys.map(async (key) => {
+      const sourceValue = await sourceGraph.get(key);
+      if (this.isAsyncDictionary(sourceValue)) {
+        const targetValue = await targetGraph.get(key);
+        if (this.isAsyncMutableDictionary(targetValue)) {
+          // Both source and target are graphs; recurse.
+          await GraphHelpers.assign(targetValue, sourceValue);
+          return;
+        }
+      }
+      // Copy the value from the source to the target.
+      await /** @type {any} */ (targetGraph).set(key, sourceValue);
+    });
+    await Promise.all(promises);
+    return targetGraph;
+  }
+
   /**
    * Attempts to cast the indicated graph variant to an explorable graph.
    *

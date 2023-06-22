@@ -3,6 +3,7 @@ import DictionaryHelpers from "./DictionaryHelpers";
 import { GraphVariant, PlainObject } from "./coreTypes";
 
 export default class GraphHelpers extends DictionaryHelpers {
+  static assign(target: GraphVariant, source: GraphVariant): Promise<AsyncGraph>;
   static from(graph: GraphVariant): AsyncGraph;
   static isGraphable(obj: any): boolean;
   static isKeyForSubgraph(graph: AsyncGraph, obj: any): Promise<boolean>;
