@@ -119,11 +119,7 @@ export default class FilesGraph {
     } else if (!isStringOrBuffer && GraphHelpers.isGraphable(value)) {
       // Treat value as a graph and write it out as a subdirectory.
       const destGraph = Reflect.construct(this.constructor, [destPath]);
-      const valueGraph = GraphHelpers.from(value);
-      for (const subKey of await valueGraph.keys()) {
-        const subValue = await valueGraph.get(subKey);
-        await destGraph.set(subKey, subValue);
-      }
+      await GraphHelpers.assign(destGraph, value);
     } else {
       // Ensure this directory exists.
       await fs.mkdir(this.dirname, { recursive: true });
