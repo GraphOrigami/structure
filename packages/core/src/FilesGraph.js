@@ -1,5 +1,6 @@
 import * as fs from "node:fs/promises";
 import path from "node:path";
+import { isTypedArray } from "node:util/types";
 import GraphHelpers from "./GraphHelpers.js";
 
 // Names of OS-generated files that should not be enumerated
@@ -93,10 +94,19 @@ export default class FilesGraph {
     const stringKey = key ? String(key) : "";
     const destPath = path.resolve(this.dirname, stringKey);
 
-    const isStringOrBuffer =
+    // Treat null value as empty string; will create an empty file.
+    if (value === null) {
+      value = "";
+    }
+
+    // True if fs.writeFile can directly write the value to a file.
+    const writeable =
       typeof value === "string" ||
       value instanceof String ||
-      value instanceof Buffer;
+      value instanceof Buffer ||
+      value instanceof DataView ||
+      value instanceof ReadableStream ||
+      isTypedArray(value);
 
     if (value === undefined) {
       // Delete the file or directory.
@@ -116,7 +126,7 @@ export default class FilesGraph {
         // Delete file.
         await fs.unlink(destPath);
       }
-    } else if (!isStringOrBuffer && GraphHelpers.isGraphable(value)) {
+    } else if (!writeable && GraphHelpers.isGraphable(value)) {
       // Treat value as a graph and write it out as a subdirectory.
       const destGraph = Reflect.construct(this.constructor, [destPath]);
       await GraphHelpers.assign(destGraph, value);
